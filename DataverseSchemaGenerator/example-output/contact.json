@@ -1,0 +1,181 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/org/one-crm-json-schemas/schemas/contact.json",
+  "title": "Contact",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Person with whom a business unit has a relationship, such as a customer or lead.",
+  "properties": {
+    "address1_city": {
+      "description": "City for address 1.",
+      "type": "string",
+      "maxLength": 80
+    },
+    "address1_country": {
+      "description": "Country/region for address 1.",
+      "type": "string",
+      "maxLength": 80
+    },
+    "address1_line1": {
+      "description": "First line of address 1.",
+      "type": "string",
+      "maxLength": 250
+    },
+    "address1_postalcode": {
+      "description": "ZIP Code or postal code for address 1.",
+      "type": "string",
+      "maxLength": 20
+    },
+    "address1_stateorprovince": {
+      "description": "State or province for address 1.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "annualincome": {
+      "description": "Type the contact's annual income.",
+      "type": "number",
+      "multipleOf": 0.01
+    },
+    "birthdate": {
+      "description": "Enter the contact's birthday.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "contactid": {
+      "description": "Unique identifier of the contact.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdon": {
+      "description": "Date and time when the contact was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "department": {
+      "description": "Type the department or business unit.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "description": {
+      "description": "Type additional information to describe the contact.",
+      "type": "string",
+      "maxLength": 2000
+    },
+    "donotemail": {
+      "description": "Select whether the contact allows direct emails.",
+      "type": "boolean"
+    },
+    "donotphone": {
+      "description": "Select whether the contact allows phone calls.",
+      "type": "boolean"
+    },
+    "emailaddress1": {
+      "description": "Type the primary email address for the contact.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "firstname": {
+      "description": "Type the contact's first name.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "fullname": {
+      "description": "Combines first name and last name.",
+      "type": "string",
+      "maxLength": 160
+    },
+    "gendercode": {
+      "description": "Select the contact's gender.",
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Male"
+        },
+        {
+          "const": 2,
+          "title": "Female"
+        }
+      ]
+    },
+    "jobtitle": {
+      "description": "Type the contact's job title.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "lastname": {
+      "description": "Type the contact's last name.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "middlename": {
+      "description": "Type the contact's middle name.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "mobilephone": {
+      "description": "Type the mobile phone number.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "modifiedon": {
+      "description": "Date and time when the contact was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "ownerid": {
+      "description": "Owner of the contact.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-targets": [
+        "systemuser",
+        "team"
+      ]
+    },
+    "parentcustomerid": {
+      "description": "Select the parent account or parent contact for the contact.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-targets": [
+        "account",
+        "contact"
+      ]
+    },
+    "statecode": {
+      "description": "Shows whether the contact is active or inactive.",
+      "oneOf": [
+        {
+          "const": 0,
+          "title": "Active"
+        },
+        {
+          "const": 1,
+          "title": "Inactive"
+        }
+      ]
+    },
+    "statuscode": {
+      "description": "Select the contact's status.",
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Active"
+        },
+        {
+          "const": 2,
+          "title": "Inactive"
+        }
+      ]
+    },
+    "telephone1": {
+      "description": "Type the main phone number for this contact.",
+      "type": "string",
+      "maxLength": 50
+    }
+  },
+  "required": [
+    "contactid",
+    "lastname",
+    "ownerid",
+    "statecode"
+  ]
+}

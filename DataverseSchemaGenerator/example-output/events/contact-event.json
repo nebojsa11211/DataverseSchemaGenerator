@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/org/one-crm-json-schemas/schemas/events/contact-event.json",
+  "title": "Contact Event",
+  "description": "EventBus envelope for contact entity events",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "Create",
+        "Update",
+        "Delete"
+      ],
+      "description": "Type of entity operation"
+    },
+    "eventTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the event occurred"
+    },
+    "entityName": {
+      "type": "string",
+      "const": "contact",
+      "description": "Logical name of the entity"
+    },
+    "correlationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Correlation ID for tracking related events"
+    },
+    "userId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the user who triggered the event"
+    },
+    "organizationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the Dataverse organization"
+    },
+    "data": {
+      "$ref": "https://github.com/org/one-crm-json-schemas/schemas/contact.json",
+      "description": "The entity data payload"
+    },
+    "previousData": {
+      "oneOf": [
+        {
+          "$ref": "https://github.com/org/one-crm-json-schemas/schemas/contact.json"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Previous state of the entity (for Update events)"
+    }
+  },
+  "required": [
+    "eventId",
+    "eventType",
+    "eventTime",
+    "entityName",
+    "data"
+  ]
+}

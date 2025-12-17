@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.0.0" languagecode="1033" generatedBy="CrmLive">
+  <Entities>
+    <Entity>
+      <Name>account</Name>
+      <EntityInfo>
+        <entity Name="account" primaryidattribute="accountid" primaryattribute="name">
+          <LocalizedNames>
+            <LocalizedName description="Account" languagecode="1033" />
+          </LocalizedNames>
+          <Descriptions>
+            <Description description="Business that represents a customer or potential customer." languagecode="1033" />
+          </Descriptions>
+          <attributes>
+            <attribute PhysicalName="AccountId">
+              <Type>primarykey</Type>
+              <displaynames>
+                <displayname description="Account" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Unique identifier of the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Name">
+              <Type>nvarchar</Type>
+              <Length>160</Length>
+              <displaynames>
+                <displayname description="Account Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the company or business name." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>Required</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <ValidForCreateApi>1</ValidForCreateApi>
+              <ValidForUpdateApi>1</ValidForUpdateApi>
+            </attribute>
+            <attribute PhysicalName="AccountNumber">
+              <Type>nvarchar</Type>
+              <Length>20</Length>
+              <displaynames>
+                <displayname description="Account Number" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type an ID number or code for the account to quickly search for it." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Description">
+              <Type>memo</Type>
+              <Length>2000</Length>
+              <displaynames>
+                <displayname description="Description" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type additional information to describe the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="EmailAddress1">
+              <Type>nvarchar</Type>
+              <Length>100</Length>
+              <displaynames>
+                <displayname description="Email" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the primary email address for the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Telephone1">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Main Phone" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the main phone number for this account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="WebSiteURL">
+              <Type>nvarchar</Type>
+              <Length>200</Length>
+              <displaynames>
+                <displayname description="Website" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the account's website URL." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Revenue">
+              <Type>money</Type>
+              <Precision>2</Precision>
+              <MinValue>0</MinValue>
+              <MaxValue>100000000000000</MaxValue>
+              <displaynames>
+                <displayname description="Annual Revenue" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the annual revenue for the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="NumberOfEmployees">
+              <Type>int</Type>
+              <MinValue>0</MinValue>
+              <MaxValue>1000000000</MaxValue>
+              <displaynames>
+                <displayname description="Number of Employees" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the number of employees at the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="IndustryCode">
+              <Type>picklist</Type>
+              <displaynames>
+                <displayname description="Industry" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select the primary industry for the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="account_industrycode">
+                <option value="1">
+                  <labels>
+                    <label description="Accounting" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="2">
+                  <labels>
+                    <label description="Agriculture" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="3">
+                  <labels>
+                    <label description="Broadcasting" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="4">
+                  <labels>
+                    <label description="Consulting" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="5">
+                  <labels>
+                    <label description="Education" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="6">
+                  <labels>
+                    <label description="Financial Services" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="7">
+                  <labels>
+                    <label description="Healthcare" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="8">
+                  <labels>
+                    <label description="Manufacturing" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="9">
+                  <labels>
+                    <label description="Retail" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="10">
+                  <labels>
+                    <label description="Technology" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="StateCode">
+              <Type>state</Type>
+              <displaynames>
+                <displayname description="Status" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Shows whether the account is active or inactive." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="account_statecode">
+                <option value="0">
+                  <labels>
+                    <label description="Active" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="1">
+                  <labels>
+                    <label description="Inactive" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="StatusCode">
+              <Type>status</Type>
+              <displaynames>
+                <displayname description="Status Reason" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select the status reason." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="account_statuscode">
+                <option value="1">
+                  <labels>
+                    <label description="Active" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="2">
+                  <labels>
+                    <label description="Inactive" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="DoNotEmail">
+              <Type>bit</Type>
+              <displaynames>
+                <displayname description="Do not allow Emails" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select whether the account allows direct emails." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="DoNotPhone">
+              <Type>bit</Type>
+              <displaynames>
+                <displayname description="Do not allow Phone Calls" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select whether the account allows phone calls." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="PrimaryContactId">
+              <Type>lookup</Type>
+              <displaynames>
+                <displayname description="Primary Contact" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Choose the primary contact for the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <LookupTypes>
+                <LookupType id="contact" />
+              </LookupTypes>
+            </attribute>
+            <attribute PhysicalName="ParentAccountId">
+              <Type>lookup</Type>
+              <displaynames>
+                <displayname description="Parent Account" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Choose the parent account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <LookupTypes>
+                <LookupType id="account" />
+              </LookupTypes>
+            </attribute>
+            <attribute PhysicalName="OwnerId">
+              <Type>owner</Type>
+              <displaynames>
+                <displayname description="Owner" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Owner of the account." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <LookupTypes>
+                <LookupType id="systemuser" />
+                <LookupType id="team" />
+              </LookupTypes>
+            </attribute>
+            <attribute PhysicalName="CreatedOn">
+              <Type>datetime</Type>
+              <displaynames>
+                <displayname description="Created On" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Date and time when the account was created." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="ModifiedOn">
+              <Type>datetime</Type>
+              <displaynames>
+                <displayname description="Modified On" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Date and time when the account was last modified." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_Line1">
+              <Type>nvarchar</Type>
+              <Length>250</Length>
+              <displaynames>
+                <displayname description="Address 1: Street 1" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="First line for the account address." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_City">
+              <Type>nvarchar</Type>
+              <Length>80</Length>
+              <displaynames>
+                <displayname description="Address 1: City" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="City for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_StateOrProvince">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Address 1: State/Province" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="State or province for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_PostalCode">
+              <Type>nvarchar</Type>
+              <Length>20</Length>
+              <displaynames>
+                <displayname description="Address 1: ZIP/Postal Code" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="ZIP Code or postal code for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_Country">
+              <Type>nvarchar</Type>
+              <Length>80</Length>
+              <displaynames>
+                <displayname description="Address 1: Country/Region" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Country/region for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+          </attributes>
+        </entity>
+      </EntityInfo>
+    </Entity>
+    <Entity>
+      <Name>contact</Name>
+      <EntityInfo>
+        <entity Name="contact" primaryidattribute="contactid" primaryattribute="fullname">
+          <LocalizedNames>
+            <LocalizedName description="Contact" languagecode="1033" />
+          </LocalizedNames>
+          <Descriptions>
+            <Description description="Person with whom a business unit has a relationship, such as a customer or lead." languagecode="1033" />
+          </Descriptions>
+          <attributes>
+            <attribute PhysicalName="ContactId">
+              <Type>primarykey</Type>
+              <displaynames>
+                <displayname description="Contact" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Unique identifier of the contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="FirstName">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="First Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the contact's first name." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>Recommended</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="LastName">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Last Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the contact's last name." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>Required</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="FullName">
+              <Type>nvarchar</Type>
+              <Length>160</Length>
+              <displaynames>
+                <displayname description="Full Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Combines first name and last name." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="MiddleName">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Middle Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the contact's middle name." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="JobTitle">
+              <Type>nvarchar</Type>
+              <Length>100</Length>
+              <displaynames>
+                <displayname description="Job Title" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the contact's job title." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Department">
+              <Type>nvarchar</Type>
+              <Length>100</Length>
+              <displaynames>
+                <displayname description="Department" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the department or business unit." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="EmailAddress1">
+              <Type>nvarchar</Type>
+              <Length>100</Length>
+              <displaynames>
+                <displayname description="Email" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the primary email address for the contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Telephone1">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Business Phone" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the main phone number for this contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="MobilePhone">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Mobile Phone" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the mobile phone number." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="ParentCustomerId">
+              <Type>customer</Type>
+              <displaynames>
+                <displayname description="Company Name" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select the parent account or parent contact for the contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <LookupTypes>
+                <LookupType id="account" />
+                <LookupType id="contact" />
+              </LookupTypes>
+            </attribute>
+            <attribute PhysicalName="BirthDate">
+              <Type>datetime</Type>
+              <displaynames>
+                <displayname description="Birthday" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Enter the contact's birthday." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="GenderCode">
+              <Type>picklist</Type>
+              <displaynames>
+                <displayname description="Gender" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select the contact's gender." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="contact_gendercode">
+                <option value="1">
+                  <labels>
+                    <label description="Male" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="2">
+                  <labels>
+                    <label description="Female" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="StateCode">
+              <Type>state</Type>
+              <displaynames>
+                <displayname description="Status" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Shows whether the contact is active or inactive." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="contact_statecode">
+                <option value="0">
+                  <labels>
+                    <label description="Active" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="1">
+                  <labels>
+                    <label description="Inactive" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="StatusCode">
+              <Type>status</Type>
+              <displaynames>
+                <displayname description="Status Reason" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select the contact's status." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <optionset Name="contact_statuscode">
+                <option value="1">
+                  <labels>
+                    <label description="Active" languagecode="1033" />
+                  </labels>
+                </option>
+                <option value="2">
+                  <labels>
+                    <label description="Inactive" languagecode="1033" />
+                  </labels>
+                </option>
+              </optionset>
+            </attribute>
+            <attribute PhysicalName="DoNotEmail">
+              <Type>bit</Type>
+              <displaynames>
+                <displayname description="Do not allow Emails" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select whether the contact allows direct emails." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="DoNotPhone">
+              <Type>bit</Type>
+              <displaynames>
+                <displayname description="Do not allow Phone Calls" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Select whether the contact allows phone calls." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="OwnerId">
+              <Type>owner</Type>
+              <displaynames>
+                <displayname description="Owner" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Owner of the contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>SystemRequired</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+              <LookupTypes>
+                <LookupType id="systemuser" />
+                <LookupType id="team" />
+              </LookupTypes>
+            </attribute>
+            <attribute PhysicalName="CreatedOn">
+              <Type>datetime</Type>
+              <displaynames>
+                <displayname description="Created On" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Date and time when the contact was created." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="ModifiedOn">
+              <Type>datetime</Type>
+              <displaynames>
+                <displayname description="Modified On" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Date and time when the contact was last modified." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_Line1">
+              <Type>nvarchar</Type>
+              <Length>250</Length>
+              <displaynames>
+                <displayname description="Address 1: Street 1" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="First line of address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_City">
+              <Type>nvarchar</Type>
+              <Length>80</Length>
+              <displaynames>
+                <displayname description="Address 1: City" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="City for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_StateOrProvince">
+              <Type>nvarchar</Type>
+              <Length>50</Length>
+              <displaynames>
+                <displayname description="Address 1: State/Province" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="State or province for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_PostalCode">
+              <Type>nvarchar</Type>
+              <Length>20</Length>
+              <displaynames>
+                <displayname description="Address 1: ZIP/Postal Code" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="ZIP Code or postal code for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Address1_Country">
+              <Type>nvarchar</Type>
+              <Length>80</Length>
+              <displaynames>
+                <displayname description="Address 1: Country/Region" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Country/region for address 1." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="AnnualIncome">
+              <Type>money</Type>
+              <Precision>2</Precision>
+              <MinValue>0</MinValue>
+              <MaxValue>100000000000</MaxValue>
+              <displaynames>
+                <displayname description="Annual Income" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type the contact's annual income." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+            <attribute PhysicalName="Description">
+              <Type>memo</Type>
+              <Length>2000</Length>
+              <displaynames>
+                <displayname description="Description" languagecode="1033" />
+              </displaynames>
+              <Descriptions>
+                <Description description="Type additional information to describe the contact." languagecode="1033" />
+              </Descriptions>
+              <RequiredLevel>None</RequiredLevel>
+              <ValidForReadApi>1</ValidForReadApi>
+              <IsRetrievable>1</IsRetrievable>
+            </attribute>
+          </attributes>
+        </entity>
+      </EntityInfo>
+    </Entity>
+  </Entities>
+</ImportExportXml>

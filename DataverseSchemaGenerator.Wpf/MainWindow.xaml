@@ -1,0 +1,200 @@
+<Window x:Class="DataverseSchemaGenerator.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DataverseSchemaGenerator.Wpf.ViewModels"
+        mc:Ignorable="d"
+        Title="Dataverse Schema Generator"
+        Height="700" Width="900"
+        MinHeight="600" MinWidth="700"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Input/Output Section -->
+        <GroupBox Grid.Row="0" Header="Input / Output" Padding="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Input File -->
+                <Label Grid.Row="0" Grid.Column="0" Content="Input File:" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Text="{Binding InputFilePath, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalAlignment="Center" Margin="0,0,8,0" />
+                <Button Grid.Row="0" Grid.Column="2" Content="Browse..."
+                        Command="{Binding BrowseInputFileCommand}"
+                        Width="80" Margin="0,0,0,4" />
+
+                <!-- Output Directory -->
+                <Label Grid.Row="1" Grid.Column="0" Content="Output Dir:" VerticalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Text="{Binding OutputDirectoryPath, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalAlignment="Center" Margin="0,4,8,0" />
+                <Button Grid.Row="1" Grid.Column="2" Content="Browse..."
+                        Command="{Binding BrowseOutputDirectoryCommand}"
+                        Width="80" Margin="0,4,0,4" />
+
+                <!-- Base ID -->
+                <Label Grid.Row="2" Grid.Column="0" Content="Base ID:" VerticalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                         Text="{Binding BaseId, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalAlignment="Center" Margin="0,4,0,0" />
+            </Grid>
+        </GroupBox>
+
+        <!-- Options Section -->
+        <GroupBox Grid.Row="1" Header="Options" Padding="8" Margin="0,8,0,0">
+            <WrapPanel Orientation="Horizontal">
+                <CheckBox Content="Generate Event Envelopes"
+                          IsChecked="{Binding GenerateEventEnvelopes}"
+                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                <CheckBox Content="Compact Output"
+                          IsChecked="{Binding CompactOutput}"
+                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                <CheckBox Content="Include Non-Readable"
+                          IsChecked="{Binding IncludeNonReadable}"
+                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                <CheckBox Content="Include Non-Retrievable"
+                          IsChecked="{Binding IncludeNonRetrievable}"
+                          VerticalAlignment="Center" />
+            </WrapPanel>
+        </GroupBox>
+
+        <!-- Entities Section -->
+        <GroupBox Grid.Row="2" Header="Entities" Padding="8" Margin="0,8,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Entity toolbar -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+                    <Button Content="Load File"
+                            Command="{Binding LoadFileCommand}"
+                            Width="80" Margin="0,0,8,0" />
+                    <Button Content="Select All"
+                            Command="{Binding SelectAllCommand}"
+                            Width="80" Margin="0,0,8,0" />
+                    <Button Content="Select None"
+                            Command="{Binding SelectNoneCommand}"
+                            Width="80" />
+                </StackPanel>
+
+                <!-- Entity list -->
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding Entities}"
+                         BorderThickness="1"
+                         BorderBrush="#CCCCCC">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected}"
+                                      Margin="4,2">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding DisplayName}"
+                                               FontWeight="SemiBold" />
+                                    <TextBlock Text=" (" />
+                                    <TextBlock Text="{Binding AttributeCount}" />
+                                    <TextBlock Text=" attributes)" />
+                                </StackPanel>
+                            </CheckBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Empty state -->
+                <TextBlock Grid.Row="1"
+                           Text="Load a customizations.xml file to see entities"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Foreground="Gray">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Entities.Count}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+        </GroupBox>
+
+        <!-- Generate Button -->
+        <Grid Grid.Row="3" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="Generate Schemas"
+                    Command="{Binding GenerateSchemasCommand}"
+                    Height="40"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Margin="0,0,8,0" />
+
+            <Button Grid.Column="1"
+                    Content="Cancel"
+                    Command="{Binding CancelGenerationCommand}"
+                    Width="80"
+                    Height="40"
+                    Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}" />
+        </Grid>
+
+        <!-- Log Section -->
+        <GroupBox Grid.Row="4" Header="Log" Padding="8" Margin="0,8,0,0">
+            <ListBox ItemsSource="{Binding LogMessages}"
+                     BorderThickness="0"
+                     FontFamily="Consolas"
+                     FontSize="11">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </GroupBox>
+
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="5" Margin="0,8,0,0">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage}" />
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar Width="100" Height="16"
+                             IsIndeterminate="{Binding IsGenerating}"
+                             Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

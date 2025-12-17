@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/org/one-crm-json-schemas/schemas/account.json",
+  "title": "Account",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Business that represents a customer or potential customer.",
+  "properties": {
+    "accountid": {
+      "description": "Unique identifier of the account.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "accountnumber": {
+      "description": "Type an ID number or code for the account to quickly search for it.",
+      "type": "string",
+      "maxLength": 20
+    },
+    "address1_city": {
+      "description": "City for address 1.",
+      "type": "string",
+      "maxLength": 80
+    },
+    "address1_country": {
+      "description": "Country/region for address 1.",
+      "type": "string",
+      "maxLength": 80
+    },
+    "address1_line1": {
+      "description": "First line for the account address.",
+      "type": "string",
+      "maxLength": 250
+    },
+    "address1_postalcode": {
+      "description": "ZIP Code or postal code for address 1.",
+      "type": "string",
+      "maxLength": 20
+    },
+    "address1_stateorprovince": {
+      "description": "State or province for address 1.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "createdon": {
+      "description": "Date and time when the account was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "description": {
+      "description": "Type additional information to describe the account.",
+      "type": "string",
+      "maxLength": 2000
+    },
+    "donotemail": {
+      "description": "Select whether the account allows direct emails.",
+      "type": "boolean"
+    },
+    "donotphone": {
+      "description": "Select whether the account allows phone calls.",
+      "type": "boolean"
+    },
+    "emailaddress1": {
+      "description": "Type the primary email address for the account.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "industrycode": {
+      "description": "Select the primary industry for the account.",
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Accounting"
+        },
+        {
+          "const": 2,
+          "title": "Agriculture"
+        },
+        {
+          "const": 3,
+          "title": "Broadcasting"
+        },
+        {
+          "const": 4,
+          "title": "Consulting"
+        },
+        {
+          "const": 5,
+          "title": "Education"
+        },
+        {
+          "const": 6,
+          "title": "Financial Services"
+        },
+        {
+          "const": 7,
+          "title": "Healthcare"
+        },
+        {
+          "const": 8,
+          "title": "Manufacturing"
+        },
+        {
+          "const": 9,
+          "title": "Retail"
+        },
+        {
+          "const": 10,
+          "title": "Technology"
+        }
+      ]
+    },
+    "modifiedon": {
+      "description": "Date and time when the account was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "description": "Type the company or business name.",
+      "type": "string",
+      "maxLength": 160
+    },
+    "numberofemployees": {
+      "description": "Type the number of employees at the account.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000000
+    },
+    "ownerid": {
+      "description": "Owner of the account.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-targets": [
+        "systemuser",
+        "team"
+      ]
+    },
+    "parentaccountid": {
+      "description": "Choose the parent account.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-target": "account"
+    },
+    "primarycontactid": {
+      "description": "Choose the primary contact for the account.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-target": "contact"
+    },
+    "revenue": {
+      "description": "Type the annual revenue for the account.",
+      "type": "number",
+      "multipleOf": 0.01
+    },
+    "statecode": {
+      "description": "Shows whether the account is active or inactive.",
+      "oneOf": [
+        {
+          "const": 0,
+          "title": "Active"
+        },
+        {
+          "const": 1,
+          "title": "Inactive"
+        }
+      ]
+    },
+    "statuscode": {
+      "description": "Select the status reason.",
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Active"
+        },
+        {
+          "const": 2,
+          "title": "Inactive"
+        }
+      ]
+    },
+    "telephone1": {
+      "description": "Type the main phone number for this account.",
+      "type": "string",
+      "maxLength": 50
+    },
+    "websiteurl": {
+      "description": "Type the account's website URL.",
+      "type": "string",
+      "maxLength": 200
+    }
+  },
+  "required": [
+    "accountid",
+    "name",
+    "ownerid",
+    "statecode"
+  ]
+}
