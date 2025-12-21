@@ -29,7 +29,8 @@
         </Grid.RowDefinitions>
 
         <!-- Input/Output Section -->
-        <GroupBox Grid.Row="0" Header="Input / Output" Padding="8">
+        <GroupBox Grid.Row="0" Header="Input / Output" Padding="8"
+                  ToolTip="Configure input file and output directory paths for schema generation">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -43,51 +44,65 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Input File -->
-                <Label Grid.Row="0" Grid.Column="0" Content="Input File:" VerticalAlignment="Center" />
+                <Label Grid.Row="0" Grid.Column="0" Content="Input File:" VerticalAlignment="Center"
+                       ToolTip="Path to the Dataverse customizations.xml file to process" />
                 <TextBox Grid.Row="0" Grid.Column="1"
                          Text="{Binding InputFilePath, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalAlignment="Center" Margin="0,0,8,0" />
+                         VerticalAlignment="Center" Margin="0,0,8,0"
+                         ToolTip="Enter or browse to select the customizations.xml file exported from Dataverse/Dynamics 365. This file contains entity and attribute metadata definitions." />
                 <Button Grid.Row="0" Grid.Column="2" Content="Browse..."
                         Command="{Binding BrowseInputFileCommand}"
-                        Width="80" Margin="0,0,0,4" />
+                        Width="80" Margin="0,0,0,4"
+                        ToolTip="Open file browser to select a customizations.xml file" />
 
                 <!-- Output Directory -->
-                <Label Grid.Row="1" Grid.Column="0" Content="Output Dir:" VerticalAlignment="Center" />
+                <Label Grid.Row="1" Grid.Column="0" Content="Output Dir:" VerticalAlignment="Center"
+                       ToolTip="Directory where generated JSON Schema files will be saved" />
                 <TextBox Grid.Row="1" Grid.Column="1"
                          Text="{Binding OutputDirectoryPath, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalAlignment="Center" Margin="0,4,8,0" />
+                         VerticalAlignment="Center" Margin="0,4,8,0"
+                         ToolTip="Enter or browse to select the output directory. Each selected entity will generate a separate .json schema file in this location." />
                 <Button Grid.Row="1" Grid.Column="2" Content="Browse..."
                         Command="{Binding BrowseOutputDirectoryCommand}"
-                        Width="80" Margin="0,4,0,4" />
+                        Width="80" Margin="0,4,0,4"
+                        ToolTip="Open folder browser to select the output directory" />
 
                 <!-- Base ID -->
-                <Label Grid.Row="2" Grid.Column="0" Content="Base ID:" VerticalAlignment="Center" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Base ID:" VerticalAlignment="Center"
+                       ToolTip="Base URI for JSON Schema $id references" />
                 <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                          Text="{Binding BaseId, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalAlignment="Center" Margin="0,4,0,0" />
+                         VerticalAlignment="Center" Margin="0,4,0,0"
+                         ToolTip="Base URI used for generating JSON Schema $id values (e.g., https://example.com/schemas/). Each entity schema will append its name to this base URI." />
             </Grid>
         </GroupBox>
 
         <!-- Options Section -->
-        <GroupBox Grid.Row="1" Header="Options" Padding="8" Margin="0,8,0,0">
+        <GroupBox Grid.Row="1" Header="Options" Padding="8" Margin="0,8,0,0"
+                  ToolTip="Configure schema generation options">
             <WrapPanel Orientation="Horizontal">
                 <CheckBox Content="Generate Event Envelopes"
                           IsChecked="{Binding GenerateEventEnvelopes}"
-                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                          Margin="0,0,24,0" VerticalAlignment="Center"
+                          ToolTip="When enabled, generates additional wrapper schemas for event envelopes containing entity data. Useful for messaging and integration scenarios." />
                 <CheckBox Content="Compact Output"
                           IsChecked="{Binding CompactOutput}"
-                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                          Margin="0,0,24,0" VerticalAlignment="Center"
+                          ToolTip="When enabled, outputs JSON without indentation or extra whitespace. Reduces file size but makes schemas harder to read." />
                 <CheckBox Content="Include Non-Readable"
                           IsChecked="{Binding IncludeNonReadable}"
-                          Margin="0,0,24,0" VerticalAlignment="Center" />
+                          Margin="0,0,24,0" VerticalAlignment="Center"
+                          ToolTip="When enabled, includes attributes where ValidForReadApi=false. By default, only attributes valid for read operations are included." />
                 <CheckBox Content="Include Non-Retrievable"
                           IsChecked="{Binding IncludeNonRetrievable}"
-                          VerticalAlignment="Center" />
+                          VerticalAlignment="Center"
+                          ToolTip="When enabled, includes attributes where IsRetrievable=false. By default, only retrievable attributes are included in the schema." />
             </WrapPanel>
         </GroupBox>
 
         <!-- Entities Section -->
-        <GroupBox Grid.Row="2" Header="Entities" Padding="8" Margin="0,8,0,0">
+        <GroupBox Grid.Row="2" Header="Entities" Padding="8" Margin="0,8,0,0"
+                  ToolTip="Select which entities to include in schema generation">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -98,24 +113,29 @@
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
                     <Button Content="Load File"
                             Command="{Binding LoadFileCommand}"
-                            Width="80" Margin="0,0,8,0" />
+                            Width="80" Margin="0,0,8,0"
+                            ToolTip="Parse the customizations.xml file specified above and load all entity definitions. This populates the entity list below." />
                     <Button Content="Select All"
                             Command="{Binding SelectAllCommand}"
-                            Width="80" Margin="0,0,8,0" />
+                            Width="80" Margin="0,0,8,0"
+                            ToolTip="Select all entities in the list for schema generation" />
                     <Button Content="Select None"
                             Command="{Binding SelectNoneCommand}"
-                            Width="80" />
+                            Width="80"
+                            ToolTip="Deselect all entities in the list" />
                 </StackPanel>
 
                 <!-- Entity list -->
                 <ListBox Grid.Row="1"
                          ItemsSource="{Binding Entities}"
                          BorderThickness="1"
-                         BorderBrush="#CCCCCC">
+                         BorderBrush="#CCCCCC"
+                         ToolTip="List of entities found in the customizations.xml file. Check the entities you want to generate JSON Schema files for.">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding IsSelected}"
-                                      Margin="4,2">
+                                      Margin="4,2"
+                                      ToolTip="Check to include this entity in schema generation. The number in parentheses shows how many attributes will be included.">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding DisplayName}"
                                                FontWeight="SemiBold" />
@@ -161,22 +181,26 @@
                     Height="40"
                     FontSize="14"
                     FontWeight="SemiBold"
-                    Margin="0,0,8,0" />
+                    Margin="0,0,8,0"
+                    ToolTip="Start generating JSON Schema (Draft 7) files for all selected entities. Files will be saved to the output directory." />
 
             <Button Grid.Column="1"
                     Content="Cancel"
                     Command="{Binding CancelGenerationCommand}"
                     Width="80"
                     Height="40"
-                    Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}" />
+                    Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}"
+                    ToolTip="Cancel the current schema generation operation" />
         </Grid>
 
         <!-- Log Section -->
-        <GroupBox Grid.Row="4" Header="Log" Padding="8" Margin="0,8,0,0">
+        <GroupBox Grid.Row="4" Header="Log" Padding="8" Margin="0,8,0,0"
+                  ToolTip="Activity log showing generation progress and any errors or warnings">
             <ListBox ItemsSource="{Binding LogMessages}"
                      BorderThickness="0"
                      FontFamily="Consolas"
-                     FontSize="11">
+                     FontSize="11"
+                     ToolTip="Displays detailed messages about file loading, parsing, and schema generation progress. Scroll to see all messages.">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="2" />
@@ -186,14 +210,17 @@
         </GroupBox>
 
         <!-- Status Bar -->
-        <StatusBar Grid.Row="5" Margin="0,8,0,0">
-            <StatusBarItem>
+        <StatusBar Grid.Row="5" Margin="0,8,0,0"
+                   ToolTip="Application status and progress information">
+            <StatusBarItem ToolTip="Current status message">
                 <TextBlock Text="{Binding StatusMessage}" />
             </StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Right">
+            <StatusBarItem HorizontalAlignment="Right"
+                           ToolTip="Generation progress indicator">
                 <ProgressBar Width="100" Height="16"
                              IsIndeterminate="{Binding IsGenerating}"
-                             Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}" />
+                             Visibility="{Binding IsGenerating, Converter={StaticResource BoolToVis}}"
+                             ToolTip="Schema generation is in progress. Click Cancel to stop." />
             </StatusBarItem>
         </StatusBar>
     </Grid>
