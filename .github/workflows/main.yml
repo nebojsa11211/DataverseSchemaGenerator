@@ -3,11 +3,12 @@ name: Build and Package
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # Allows you to run it manually
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Changed from ubuntu-latest to windows-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -15,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x # Adjust this to your project's version
+        dotnet-version: 8.0.x # Or 6.0.x/7.0.x depending on your project
 
     - name: Restore dependencies
       run: dotnet restore
@@ -24,10 +25,11 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
+      # This will create the .exe and necessary DLLs
       run: dotnet publish --configuration Release --no-build --output ./publish
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: DataverseSchemaGenerator-Binary
+        name: DataverseSchemaGenerator-Windows
         path: ./publish/
