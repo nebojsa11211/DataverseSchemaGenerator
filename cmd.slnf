@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "DataverseSchemaGenerator.sln",
+    "projects": [
+      "DataverseSchemaGenerator.Core\\DataverseSchemaGenerator.Core.csproj",
+      "DataverseSchemaGenerator.Wpf\\DataverseSchemaGenerator.Wpf.csproj",
+      "DataverseSchemaGenerator\\DataverseSchemaGenerator.csproj"
+    ]
+  }
+}

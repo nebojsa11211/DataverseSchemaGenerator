@@ -103,6 +103,12 @@ public partial class MainViewModel : ObservableObject
         try
         {
             LogMessages.Clear();
+
+            // Unsubscribe from existing entities before clearing
+            foreach (var entity in Entities)
+            {
+                entity.PropertyChanged -= OnEntityPropertyChanged;
+            }
             Entities.Clear();
 
             if (!File.Exists(InputFilePath))
@@ -117,7 +123,9 @@ public partial class MainViewModel : ObservableObject
 
             foreach (var entity in entities)
             {
-                Entities.Add(new EntityViewModel(entity));
+                var viewModel = new EntityViewModel(entity);
+                viewModel.PropertyChanged += OnEntityPropertyChanged;
+                Entities.Add(viewModel);
             }
 
             AddLog($"Found {entities.Count} entities");
@@ -236,6 +244,14 @@ public partial class MainViewModel : ObservableObject
         {
             AddLog(message);
         });
+    }
+
+    private void OnEntityPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(EntityViewModel.IsSelected))
+        {
+            GenerateSchemasCommand.NotifyCanExecuteChanged();
+        }
     }
 
     private void AddLog(string message)

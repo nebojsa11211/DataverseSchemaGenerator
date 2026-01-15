@@ -1,0 +1,965 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Account",
+  "type": "object",
+  "properties": {
+    "accountid": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "address1_addressid": {
+      "type": "string"
+    },
+    "address1_addresstypecode": {
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "BillTo"
+        },
+        {
+          "const": 2,
+          "title": "ShipTo"
+        },
+        {
+          "const": 3,
+          "title": "Primary"
+        },
+        {
+          "const": 4,
+          "title": "Other"
+        }
+      ],
+      "description": "account_address1_addresstypecode enum (4 values)"
+    },
+    "address1_city": {
+      "type": "string"
+    },
+    "address1_country": {
+      "type": "string"
+    },
+    "address1_county": {
+      "type": "string"
+    },
+    "address1_line1": {
+      "type": "string"
+    },
+    "address1_postalcode": {
+      "type": "string"
+    },
+    "address1_stateorprovince": {
+      "type": "string"
+    },
+    "address2_addressid": {
+      "type": "string"
+    },
+    "address2_city": {
+      "type": "string"
+    },
+    "address2_country": {
+      "type": "string"
+    },
+    "address2_county": {
+      "type": "string"
+    },
+    "address2_line1": {
+      "type": "string"
+    },
+    "address2_postalcode": {
+      "type": "string"
+    },
+    "address2_stateorprovince": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "emailaddress1": {
+      "type": "string"
+    },
+    "emailaddress2": {
+      "type": "string"
+    },
+    "in_CompanyId": {
+      "type": "string"
+    },
+    "in_Country": {
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Afghanistan"
+        },
+        {
+          "const": 2,
+          "title": "Albania"
+        },
+        {
+          "const": 3,
+          "title": "Algeria"
+        },
+        {
+          "const": 4,
+          "title": "Andorra"
+        },
+        {
+          "const": 5,
+          "title": "Angola"
+        },
+        {
+          "const": 6,
+          "title": "Argentina"
+        },
+        {
+          "const": 7,
+          "title": "Armenia"
+        },
+        {
+          "const": 8,
+          "title": "Australia"
+        },
+        {
+          "const": 9,
+          "title": "Austria"
+        },
+        {
+          "const": 10,
+          "title": "Azerbaijan"
+        },
+        {
+          "const": 11,
+          "title": "Bahamas"
+        },
+        {
+          "const": 12,
+          "title": "Bahrain"
+        },
+        {
+          "const": 13,
+          "title": "Bangladesh"
+        },
+        {
+          "const": 14,
+          "title": "Barbados"
+        },
+        {
+          "const": 15,
+          "title": "Belarus"
+        },
+        {
+          "const": 16,
+          "title": "Belgium"
+        },
+        {
+          "const": 17,
+          "title": "Belize"
+        },
+        {
+          "const": 18,
+          "title": "Benin"
+        },
+        {
+          "const": 19,
+          "title": "Bhutan"
+        },
+        {
+          "const": 20,
+          "title": "Bolivia"
+        },
+        {
+          "const": 21,
+          "title": "BosniaandHerzegovina"
+        },
+        {
+          "const": 22,
+          "title": "Botswana"
+        },
+        {
+          "const": 23,
+          "title": "Brazil"
+        },
+        {
+          "const": 24,
+          "title": "Brunei"
+        },
+        {
+          "const": 25,
+          "title": "Bulgaria"
+        },
+        {
+          "const": 26,
+          "title": "BurkinaFaso"
+        },
+        {
+          "const": 27,
+          "title": "Burundi"
+        },
+        {
+          "const": 28,
+          "title": "CaboVerde"
+        },
+        {
+          "const": 29,
+          "title": "Cambodia"
+        },
+        {
+          "const": 30,
+          "title": "Cameroon"
+        },
+        {
+          "const": 31,
+          "title": "Canada"
+        },
+        {
+          "const": 32,
+          "title": "CentralAfricanRepublic"
+        },
+        {
+          "const": 33,
+          "title": "Chad"
+        },
+        {
+          "const": 34,
+          "title": "Chile"
+        },
+        {
+          "const": 35,
+          "title": "China"
+        },
+        {
+          "const": 36,
+          "title": "Colombia"
+        },
+        {
+          "const": 37,
+          "title": "Comoros"
+        },
+        {
+          "const": 38,
+          "title": "Congo"
+        },
+        {
+          "const": 39,
+          "title": "CostaRica"
+        },
+        {
+          "const": 40,
+          "title": "Croatia"
+        },
+        {
+          "const": 41,
+          "title": "Cuba"
+        },
+        {
+          "const": 42,
+          "title": "Cyprus"
+        },
+        {
+          "const": 43,
+          "title": "Czechia"
+        },
+        {
+          "const": 44,
+          "title": "Denmark"
+        },
+        {
+          "const": 45,
+          "title": "Djibouti"
+        },
+        {
+          "const": 46,
+          "title": "Dominica"
+        },
+        {
+          "const": 47,
+          "title": "DominicanRepublic"
+        },
+        {
+          "const": 48,
+          "title": "Ecuador"
+        },
+        {
+          "const": 49,
+          "title": "Egypt"
+        },
+        {
+          "const": 50,
+          "title": "ElSalvador"
+        },
+        {
+          "const": 51,
+          "title": "EquatorialGuinea"
+        },
+        {
+          "const": 52,
+          "title": "Eritrea"
+        },
+        {
+          "const": 53,
+          "title": "Estonia"
+        },
+        {
+          "const": 54,
+          "title": "Eswatini"
+        },
+        {
+          "const": 55,
+          "title": "Ethiopia"
+        },
+        {
+          "const": 56,
+          "title": "Fiji"
+        },
+        {
+          "const": 57,
+          "title": "Finland"
+        },
+        {
+          "const": 58,
+          "title": "France"
+        },
+        {
+          "const": 59,
+          "title": "Gabon"
+        },
+        {
+          "const": 60,
+          "title": "Gambia"
+        },
+        {
+          "const": 61,
+          "title": "Georgia"
+        },
+        {
+          "const": 62,
+          "title": "Germany"
+        },
+        {
+          "const": 63,
+          "title": "Ghana"
+        },
+        {
+          "const": 64,
+          "title": "Greece"
+        },
+        {
+          "const": 65,
+          "title": "Grenada"
+        },
+        {
+          "const": 66,
+          "title": "Guatemala"
+        },
+        {
+          "const": 67,
+          "title": "Guinea"
+        },
+        {
+          "const": 68,
+          "title": "GuineaBissau"
+        },
+        {
+          "const": 69,
+          "title": "Guyana"
+        },
+        {
+          "const": 70,
+          "title": "Haiti"
+        },
+        {
+          "const": 71,
+          "title": "Honduras"
+        },
+        {
+          "const": 72,
+          "title": "Hungary"
+        },
+        {
+          "const": 73,
+          "title": "Iceland"
+        },
+        {
+          "const": 74,
+          "title": "India"
+        },
+        {
+          "const": 75,
+          "title": "Indonesia"
+        },
+        {
+          "const": 76,
+          "title": "Iran"
+        },
+        {
+          "const": 77,
+          "title": "Iraq"
+        },
+        {
+          "const": 78,
+          "title": "Ireland"
+        },
+        {
+          "const": 79,
+          "title": "Israel"
+        },
+        {
+          "const": 80,
+          "title": "Italy"
+        },
+        {
+          "const": 81,
+          "title": "Jamaica"
+        },
+        {
+          "const": 82,
+          "title": "Japan"
+        },
+        {
+          "const": 83,
+          "title": "Jordan"
+        },
+        {
+          "const": 84,
+          "title": "Kazakhstan"
+        },
+        {
+          "const": 85,
+          "title": "Kenya"
+        },
+        {
+          "const": 86,
+          "title": "Kiribati"
+        },
+        {
+          "const": 87,
+          "title": "NorthKorea"
+        },
+        {
+          "const": 88,
+          "title": "SouthKorea"
+        },
+        {
+          "const": 89,
+          "title": "Kosovo"
+        },
+        {
+          "const": 90,
+          "title": "Kuwait"
+        },
+        {
+          "const": 91,
+          "title": "Kyrgyzstan"
+        },
+        {
+          "const": 92,
+          "title": "Laos"
+        },
+        {
+          "const": 93,
+          "title": "Latvia"
+        },
+        {
+          "const": 94,
+          "title": "Lebanon"
+        },
+        {
+          "const": 95,
+          "title": "Lesotho"
+        },
+        {
+          "const": 96,
+          "title": "Liberia"
+        },
+        {
+          "const": 97,
+          "title": "Libya"
+        },
+        {
+          "const": 98,
+          "title": "Liechtenstein"
+        },
+        {
+          "const": 99,
+          "title": "Lithuania"
+        },
+        {
+          "const": 100,
+          "title": "Luxembourg"
+        },
+        {
+          "const": 101,
+          "title": "Madagascar"
+        },
+        {
+          "const": 102,
+          "title": "Malawi"
+        },
+        {
+          "const": 103,
+          "title": "Malaysia"
+        },
+        {
+          "const": 104,
+          "title": "Maldives"
+        },
+        {
+          "const": 105,
+          "title": "Mali"
+        },
+        {
+          "const": 106,
+          "title": "Malta"
+        },
+        {
+          "const": 107,
+          "title": "MarshallIslands"
+        },
+        {
+          "const": 108,
+          "title": "Mauritania"
+        },
+        {
+          "const": 109,
+          "title": "Mauritius"
+        },
+        {
+          "const": 110,
+          "title": "Mexico"
+        },
+        {
+          "const": 111,
+          "title": "Micronesia"
+        },
+        {
+          "const": 112,
+          "title": "Moldova"
+        },
+        {
+          "const": 113,
+          "title": "Monaco"
+        },
+        {
+          "const": 114,
+          "title": "Mongolia"
+        },
+        {
+          "const": 115,
+          "title": "Montenegro"
+        },
+        {
+          "const": 116,
+          "title": "Morocco"
+        },
+        {
+          "const": 117,
+          "title": "Mozambique"
+        },
+        {
+          "const": 118,
+          "title": "Myanmar"
+        },
+        {
+          "const": 119,
+          "title": "Namibia"
+        },
+        {
+          "const": 120,
+          "title": "Nauru"
+        },
+        {
+          "const": 121,
+          "title": "Nepal"
+        },
+        {
+          "const": 122,
+          "title": "Netherlands"
+        },
+        {
+          "const": 123,
+          "title": "NewZealand"
+        },
+        {
+          "const": 124,
+          "title": "Nicaragua"
+        },
+        {
+          "const": 125,
+          "title": "Niger"
+        },
+        {
+          "const": 126,
+          "title": "Nigeria"
+        },
+        {
+          "const": 127,
+          "title": "NorthMacedonia"
+        },
+        {
+          "const": 128,
+          "title": "Norway"
+        },
+        {
+          "const": 129,
+          "title": "Oman"
+        },
+        {
+          "const": 130,
+          "title": "Pakistan"
+        },
+        {
+          "const": 131,
+          "title": "Palau"
+        },
+        {
+          "const": 132,
+          "title": "PalestineState"
+        },
+        {
+          "const": 133,
+          "title": "Panama"
+        },
+        {
+          "const": 134,
+          "title": "PapuaNewGuinea"
+        },
+        {
+          "const": 135,
+          "title": "Paraguay"
+        },
+        {
+          "const": 136,
+          "title": "Peru"
+        },
+        {
+          "const": 137,
+          "title": "Philippines"
+        },
+        {
+          "const": 138,
+          "title": "Poland"
+        },
+        {
+          "const": 139,
+          "title": "Portugal"
+        },
+        {
+          "const": 140,
+          "title": "Qatar"
+        },
+        {
+          "const": 141,
+          "title": "Romania"
+        },
+        {
+          "const": 142,
+          "title": "Russia"
+        },
+        {
+          "const": 143,
+          "title": "Rwanda"
+        },
+        {
+          "const": 144,
+          "title": "SaintKittsandNevis"
+        },
+        {
+          "const": 145,
+          "title": "SaintLucia"
+        },
+        {
+          "const": 146,
+          "title": "SaintVincentandtheGrenadines"
+        },
+        {
+          "const": 147,
+          "title": "Samoa"
+        },
+        {
+          "const": 148,
+          "title": "SanMarino"
+        },
+        {
+          "const": 149,
+          "title": "SaoTomeandPrincipe"
+        },
+        {
+          "const": 150,
+          "title": "SaudiArabia"
+        },
+        {
+          "const": 151,
+          "title": "Senegal"
+        },
+        {
+          "const": 152,
+          "title": "Serbia"
+        },
+        {
+          "const": 153,
+          "title": "Seychelles"
+        },
+        {
+          "const": 154,
+          "title": "SierraLeone"
+        },
+        {
+          "const": 155,
+          "title": "Singapore"
+        },
+        {
+          "const": 156,
+          "title": "Slovakia"
+        },
+        {
+          "const": 157,
+          "title": "Slovenia"
+        },
+        {
+          "const": 158,
+          "title": "SolomonIslands"
+        },
+        {
+          "const": 159,
+          "title": "Somalia"
+        },
+        {
+          "const": 160,
+          "title": "SouthAfrica"
+        },
+        {
+          "const": 161,
+          "title": "SouthSudan"
+        },
+        {
+          "const": 162,
+          "title": "Spain"
+        },
+        {
+          "const": 163,
+          "title": "SriLanka"
+        },
+        {
+          "const": 164,
+          "title": "Sudan"
+        },
+        {
+          "const": 165,
+          "title": "Suriname"
+        },
+        {
+          "const": 166,
+          "title": "Sweden"
+        },
+        {
+          "const": 167,
+          "title": "Switzerland"
+        },
+        {
+          "const": 168,
+          "title": "Syria"
+        },
+        {
+          "const": 169,
+          "title": "Taiwan"
+        },
+        {
+          "const": 170,
+          "title": "Tajikistan"
+        },
+        {
+          "const": 171,
+          "title": "Tanzania"
+        },
+        {
+          "const": 172,
+          "title": "Thailand"
+        },
+        {
+          "const": 173,
+          "title": "TimorLeste"
+        },
+        {
+          "const": 174,
+          "title": "Togo"
+        },
+        {
+          "const": 175,
+          "title": "Tonga"
+        },
+        {
+          "const": 176,
+          "title": "TrinidadandTobago"
+        },
+        {
+          "const": 177,
+          "title": "Tunisia"
+        },
+        {
+          "const": 178,
+          "title": "Turkey"
+        },
+        {
+          "const": 179,
+          "title": "Turkmenistan"
+        },
+        {
+          "const": 180,
+          "title": "Tuvalu"
+        },
+        {
+          "const": 181,
+          "title": "Uganda"
+        },
+        {
+          "const": 182,
+          "title": "Ukraine"
+        },
+        {
+          "const": 183,
+          "title": "UnitedArabEmirates"
+        },
+        {
+          "const": 184,
+          "title": "UnitedKingdom"
+        },
+        {
+          "const": 185,
+          "title": "UnitedStatesofAmerica"
+        },
+        {
+          "const": 186,
+          "title": "Uruguay"
+        },
+        {
+          "const": 187,
+          "title": "Uzbekistan"
+        },
+        {
+          "const": 188,
+          "title": "Vanuatu"
+        },
+        {
+          "const": 189,
+          "title": "VaticanCity"
+        },
+        {
+          "const": 190,
+          "title": "Venezuela"
+        },
+        {
+          "const": 191,
+          "title": "Vietnam"
+        },
+        {
+          "const": 192,
+          "title": "Yemen"
+        },
+        {
+          "const": 193,
+          "title": "Zambia"
+        },
+        {
+          "const": 194,
+          "title": "Zimbabwe"
+        }
+      ],
+      "description": "in_countryos enum (194 values)"
+    },
+    "in_IsLegalEntity": {
+      "type": "boolean"
+    },
+    "in_IsRemovedFromCourtRegister": {
+      "type": "boolean"
+    },
+    "in_SendEinvoices": {
+      "type": "boolean"
+    },
+    "in_SyncError": {
+      "type": "string"
+    },
+    "in_SyncStatus": {
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "OK"
+        },
+        {
+          "const": 2,
+          "title": "Error"
+        }
+      ],
+      "description": "in_syncstatusos enum (2 values)"
+    },
+    "name": {
+      "type": "string"
+    },
+    "numberofemployees": {
+      "type": "number"
+    },
+    "revenue": {
+      "type": "object",
+      "description": "Money"
+    },
+    "statecode": {
+      "oneOf": [
+        {
+          "const": 0,
+          "title": "Active"
+        },
+        {
+          "const": 1,
+          "title": "Inactive"
+        }
+      ],
+      "description": "account_statecode enum (2 values)"
+    },
+    "statuscode": {
+      "oneOf": [
+        {
+          "const": 1,
+          "title": "Active"
+        },
+        {
+          "const": 2,
+          "title": "Inactive"
+        }
+      ],
+      "description": "account_statuscode enum (2 values)"
+    },
+    "telephone1": {
+      "type": "string"
+    },
+    "telephone2": {
+      "type": "string"
+    },
+    "websiteurl": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Id",
+    "address1_city",
+    "address1_country",
+    "address1_county",
+    "address1_line1",
+    "address1_postalcode",
+    "address1_stateorprovince",
+    "address2_city",
+    "address2_country",
+    "address2_county",
+    "address2_line1",
+    "address2_postalcode",
+    "address2_stateorprovince",
+    "description",
+    "emailaddress1",
+    "emailaddress2",
+    "in_CompanyId",
+    "in_SyncError",
+    "name",
+    "revenue",
+    "telephone1",
+    "telephone2",
+    "websiteurl"
+  ],
+  "description": "Schema for account entity (cleaned, unused fields removed)"
+}

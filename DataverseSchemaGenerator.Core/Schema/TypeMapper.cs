@@ -67,11 +67,11 @@ public static class TypeMapper
             case DataverseAttributeType.Picklist:
             case DataverseAttributeType.State:
             case DataverseAttributeType.Status:
-                MapPicklist(property, attribute.OptionSetValues);
+                MapPicklist(property, attribute.OptionSetValues, attribute.OptionSetName, attribute.LogicalName);
                 break;
 
             case DataverseAttributeType.MultiSelectPicklist:
-                MapMultiSelectPicklist(property, attribute.OptionSetValues);
+                MapMultiSelectPicklist(property, attribute.OptionSetValues, attribute.OptionSetName, attribute.LogicalName);
                 break;
 
             case DataverseAttributeType.Lookup:
@@ -165,13 +165,18 @@ public static class TypeMapper
         property["type"] = "boolean";
     }
 
-    private static void MapPicklist(JsonObject property, List<OptionSetValue>? optionSetValues)
+    private static void MapPicklist(JsonObject property, List<OptionSetValue>? optionSetValues, string? optionSetName, string attributeLogicalName)
     {
-        if (optionSetValues is { Count: > 0 })
+        // Try to resolve OptionSet values - first from inline, then from global registry
+        var resolvedValues = optionSetValues is { Count: > 0 }
+            ? optionSetValues
+            : GlobalOptionSetRegistry.GetOptionSetValues(optionSetName, attributeLogicalName);
+
+        if (resolvedValues is { Count: > 0 })
         {
             // Use oneOf with const and title for each option
             var oneOf = new JsonArray();
-            foreach (var option in optionSetValues)
+            foreach (var option in resolvedValues)
             {
                 var optionDef = new JsonObject
                 {
@@ -185,23 +190,38 @@ public static class TypeMapper
                 oneOf.Add(optionDef);
             }
             property["oneOf"] = oneOf;
+
+            // Add description from global registry if not already present
+            if (!property.ContainsKey("description"))
+            {
+                var registryDescription = GlobalOptionSetRegistry.GetOptionSetDescription(optionSetName, attributeLogicalName);
+                if (!string.IsNullOrEmpty(registryDescription))
+                {
+                    property["description"] = registryDescription;
+                }
+            }
         }
         else
         {
-            // No inline optionset, fall back to integer
+            // No inline or global optionset found, fall back to integer
             property["type"] = "integer";
         }
     }
 
-    private static void MapMultiSelectPicklist(JsonObject property, List<OptionSetValue>? optionSetValues)
+    private static void MapMultiSelectPicklist(JsonObject property, List<OptionSetValue>? optionSetValues, string? optionSetName, string attributeLogicalName)
     {
         property["type"] = "array";
 
+        // Try to resolve OptionSet values - first from inline, then from global registry
+        var resolvedValues = optionSetValues is { Count: > 0 }
+            ? optionSetValues
+            : GlobalOptionSetRegistry.GetOptionSetValues(optionSetName, attributeLogicalName);
+
         var items = new JsonObject();
-        if (optionSetValues is { Count: > 0 })
+        if (resolvedValues is { Count: > 0 })
         {
             var oneOf = new JsonArray();
-            foreach (var option in optionSetValues)
+            foreach (var option in resolvedValues)
             {
                 var optionDef = new JsonObject
                 {
@@ -215,6 +235,16 @@ public static class TypeMapper
                 oneOf.Add(optionDef);
             }
             items["oneOf"] = oneOf;
+
+            // Add description from global registry if not already present
+            if (!property.ContainsKey("description"))
+            {
+                var registryDescription = GlobalOptionSetRegistry.GetOptionSetDescription(optionSetName, attributeLogicalName);
+                if (!string.IsNullOrEmpty(registryDescription))
+                {
+                    property["description"] = registryDescription;
+                }
+            }
         }
         else
         {
