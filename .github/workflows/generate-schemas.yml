@@ -3,13 +3,13 @@ name: Dataverse Auto Schema Generator
 on:
   push:
     paths:
-      - 'Input/*.xml' 
+      - 'Input/*.xml' # Pokreće se samo kada dodaš novi XML u Input folder
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write 
+      contents: write # Dozvola botu da spremi promjene u repozitorij
 
     steps:
     - name: Checkout Repository
@@ -21,18 +21,21 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore and Build
-      # Buildamo samo Console projekt kako bismo izbjegli Windows-only WPF grešku
+      # Ciljamo samo konzolni projekt kako bismo izbjegli greške s WPF-om na Linuxu
       run: dotnet build DataverseSchemaGenerator/DataverseSchemaGenerator.csproj
 
     - name: Run Batch Generation
-      # Pokrećemo Console projekt s batch parametrima
+      # Pokrećemo batch procesor koji čita iz 'Input', sprema u 'Output' i arhivira
       run: dotnet run --project DataverseSchemaGenerator/DataverseSchemaGenerator.csproj -- --batch --out ./Output
 
     - name: Commit and Push Results
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add Output/
-        git add Input/Archive/
-        git commit -m "Automated schema update: $(date +'%d-%m-%y %H:%M:%S')" || echo "No changes"
+        
+        # 'git add -A' bilježi sve: nove JSON datoteke, nove Archive foldere i brisanje iz Inputa
+        git add -A
+        
+        # Provjera ima li promjena prije commita kako workflow ne bi javio grešku ako je sve isto
+        git commit -m "Automated schema update and archive: $(date +'%d-%m-%y %H:%M:%S')" || echo "No changes to commit"
         git push
