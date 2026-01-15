@@ -3,13 +3,13 @@ name: Dataverse Auto Schema Generator
 on:
   push:
     paths:
-      - 'Input/*.xml' # Pokreće se samo kad dodaš XML datoteku
+      - 'Input/*.xml' 
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Nužno za 'git push' natrag u repo
+      contents: write 
 
     steps:
     - name: Checkout Repository
@@ -21,11 +21,12 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore and Build
-      run: dotnet build DataverseSchemaGenerator.sln
+      # Buildamo samo Console projekt kako bismo izbjegli Windows-only WPF grešku
+      run: dotnet build DataverseSchemaGenerator/DataverseSchemaGenerator.csproj
 
     - name: Run Batch Generation
-      # Koristi --batch za unikatna imena i arhiviranje u Input/Archive/
-      run: dotnet run --project DataverseSchemaGenerator -- --batch --out ./Output
+      # Pokrećemo Console projekt s batch parametrima
+      run: dotnet run --project DataverseSchemaGenerator/DataverseSchemaGenerator.csproj -- --batch --out ./Output
 
     - name: Commit and Push Results
       run: |
