@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.example.com/dataverse/in_alternativekey.json",
+  "title": "in_AlternativeKey",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Schema for Dataverse entity: in_alternativekey",
+  "properties": {
+    "createdon": {
+      "description": "Date and time when the record was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "in_alternativekeyid": {
+      "description": "Unique identifier for entity instances",
+      "type": "string",
+      "format": "uuid"
+    },
+    "in_relatedentityid": {
+      "description": "Related To",
+      "type": "string",
+      "format": "uuid"
+    },
+    "in_system": {
+      "description": "System",
+      "type": "integer"
+    },
+    "in_value": {
+      "description": "Used for storing keys from other system for integration purposes.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "modifiedon": {
+      "description": "Date and time when the record was modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "statecode": {
+      "description": "Status of the Alternative Key",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "in_alternativekeyid",
+    "in_relatedentityid",
+    "in_system",
+    "in_value",
+    "statecode"
+  ]
+}

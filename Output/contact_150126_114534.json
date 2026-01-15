@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.example.com/dataverse/contact.json",
+  "title": "Contact",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Schema for Dataverse entity: contact",
+  "properties": {
+    "createdon": {
+      "description": "Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "emailaddress1": {
+      "description": "Type the primary email address for the contact.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "modifiedon": {
+      "description": "Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "ownerid": {
+      "description": "Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-targets": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000000"
+      ]
+    },
+    "parentcustomerid": {
+      "description": "Select the parent account or parent contact for the contact to provide a quick link to additional details, such as financial information, activities, and opportunities.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "telephone1": {
+      "description": "Type the main phone number for this contact.",
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "required": [
+    "ownerid",
+    "parentcustomerid"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.example.com/dataverse/account.json",
+  "title": "Account",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Schema for Dataverse entity: account",
+  "properties": {
+    "accountid": {
+      "description": "Unique identifier of the account.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "accountnumber": {
+      "description": "Type an ID number or code for the account to quickly search and identify the account in system views.",
+      "type": "string",
+      "maxLength": 40
+    },
+    "address1_city": {
+      "description": "Type the city for the primary address.",
+      "type": "string",
+      "maxLength": 160
+    },
+    "createdon": {
+      "description": "Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "emailaddress1": {
+      "description": "Type the primary email address for the account.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "in_companyid": {
+      "description": "Account ID",
+      "type": "string",
+      "maxLength": 40
+    },
+    "modifiedon": {
+      "description": "Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "name": {
+      "description": "Type the company or business name.",
+      "type": "string",
+      "maxLength": 320
+    },
+    "ownerid": {
+      "description": "Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.",
+      "type": "string",
+      "format": "uuid",
+      "x-lookup-targets": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000000"
+      ]
+    },
+    "telephone1": {
+      "description": "Type the main phone number for this account.",
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "required": [
+    "accountid",
+    "in_companyid",
+    "name",
+    "ownerid"
+  ]
+}
