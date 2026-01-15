@@ -69,7 +69,7 @@
               </displaynames>
               <Descriptions>
                 <Description description="Type an ID number or code for the account to quickly search and identify the account in system views." languagecode="1033" />
-                <Description description="Upišite ID broj ili kod za račun da biste brzo pretražili i prepoznali račun u sistemskim prikazima." languagecode="1050" />
+                <Description description="Upišite ID broj ili kod za račun da biste brzo pretražili ii prepoznali račun u sistemskim prikazima." languagecode="1050" />
               </Descriptions>
             </attribute>
             <attribute PhysicalName="Address1_AddressTypeCode">
@@ -6546,4 +6546,5 @@
     <Language>1033</Language>
     <Language>1050</Language>
   </Languages>
+
 </ImportExportXml>
