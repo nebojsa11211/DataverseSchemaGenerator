@@ -48,7 +48,7 @@ public sealed class SchemaWriter
     /// </summary>
     public async Task WriteEntitySchemaAsync(EntityMetadata entity, JsonObject schema)
     {
-        var fileName = $"{entity.LogicalName}.json";
+        var fileName = GetEntityFileName(entity.LogicalName);
         await WriteSchemaAsync(fileName, schema);
     }
 
@@ -61,7 +61,27 @@ public sealed class SchemaWriter
         var eventsPath = Path.Combine(_options.OutputPath, "events");
         Directory.CreateDirectory(eventsPath);
 
-        var fileName = Path.Combine("events", $"{entity.LogicalName}-event.json");
+        var fileName = Path.Combine("events", GetEventFileName(entity.LogicalName));
         await WriteSchemaAsync(fileName, schema);
+    }
+
+    /// <summary>
+    /// Gets the entity schema filename, including timestamp suffix if configured.
+    /// </summary>
+    private string GetEntityFileName(string logicalName)
+    {
+        return string.IsNullOrEmpty(_options.TimestampSuffix)
+            ? $"{logicalName}.json"
+            : $"{logicalName}_{_options.TimestampSuffix}.json";
+    }
+
+    /// <summary>
+    /// Gets the event schema filename, including timestamp suffix if configured.
+    /// </summary>
+    private string GetEventFileName(string logicalName)
+    {
+        return string.IsNullOrEmpty(_options.TimestampSuffix)
+            ? $"{logicalName}-event.json"
+            : $"{logicalName}-event_{_options.TimestampSuffix}.json";
     }
 }

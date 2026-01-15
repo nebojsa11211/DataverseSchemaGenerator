@@ -135,4 +135,10 @@ public sealed class GeneratorOptions
     /// Pretty print JSON output.
     /// </summary>
     public bool PrettyPrint { get; init; } = true;
+
+    /// <summary>
+    /// Timestamp suffix for output filenames (format: ddMMyy_HHmmss).
+    /// When set, output files will be named {entity}_{timestamp}.json.
+    /// </summary>
+    public string? TimestampSuffix { get; init; }
 }

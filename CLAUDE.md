@@ -12,14 +12,25 @@ dotnet build
 dotnet build DataverseSchemaGenerator/DataverseSchemaGenerator.csproj
 dotnet build DataverseSchemaGenerator.Wpf/DataverseSchemaGenerator.Wpf.csproj
 
-# Run console app
-cd DataverseSchemaGenerator
-dotnet run -- --input ../samples/customizations.xml --out ./schemas --base-id https://example.com/schemas/
+# Run console app (default mode - simplest usage)
+# Scans Input folder for *.xml files, outputs clean JSON schemas to current directory
+dotnet run --project DataverseSchemaGenerator
 
-# Run WPF app
+# Run console app with explicit input file
+dotnet run --project DataverseSchemaGenerator -- --input ./samples/customizations.xml --out ./schemas
+
+# Run console app in batch mode (timestamps in filenames, archiving of processed files)
+dotnet run --project DataverseSchemaGenerator -- --batch
+
+# Run WPF app (requires .NET 10 preview)
 cd DataverseSchemaGenerator.Wpf
 dotnet run
+
+# Publish as single executable
+dotnet publish DataverseSchemaGenerator/DataverseSchemaGenerator.csproj -c Release -r win-x64 --self-contained
 ```
+
+**Note:** There are currently no test projects in this solution.
 
 ## Architecture
 
@@ -47,7 +58,45 @@ Contains all business logic, referenced by both Console and WPF apps:
 
 ### Console App (`DataverseSchemaGenerator`)
 
-CLI using `System.CommandLine`. Entry point is `Program.cs` with standard command-line options for input/output paths, filtering, and event generation.
+CLI using `System.CommandLine`. Entry point is `Program.cs`.
+
+#### Default Mode (Simplest Usage)
+
+By default, the app:
+1. Scans the `Input` folder for `*.xml` files
+2. Outputs JSON schema files (e.g., `account.json`, `contact.json`) to the current directory
+3. Uses clean filenames without timestamps
+4. Moves processed XML files to `Input/Archive/`
+
+Just place your `customizations.xml` files in the `Input` folder and run `dotnet run`.
+
+#### Options
+
+- `--input`/`-i` - Path to a specific customizations.xml file (bypasses Input folder scanning)
+- `--out`/`-o` - Output directory (default: current directory)
+- `--base-id`/`-b` - Base URI for `$id` property (default: `https://schemas.example.com/dataverse/`)
+- `--entities`/`-e` - Filter to specific entities (comma-separated)
+- `--generate-events` - Generate EventBus envelope schemas
+- `--include-non-readable`, `--include-non-retrievable` - Bypass API filters
+- `--compact` - Output compact JSON (no indentation)
+- `--batch` - Enable batch mode
+
+#### Batch Mode
+
+When `--batch` is specified, the app runs in batch mode:
+1. Scans the `Input` folder for all `*.xml` files
+2. Processes each file with timestamp-suffixed output filenames (format: `ddMMyy_HHmmss`)
+3. Successfully processed files are archived to `Input/Archive/{timestamp}/`
+4. Failed XML files are moved to `Input/BadXml/{timestamp}/`
+
+Default output folder in batch mode: `./Output`
+
+Example output filenames in batch mode:
+- `account_150126_084512.json`
+- `contact_150126_084512.json`
+
+Services:
+- **Services/BatchProcessor.cs** - Handles folder scanning, timestamp generation, file archiving, and bad file handling
 
 ### WPF App (`DataverseSchemaGenerator.Wpf`)
 
