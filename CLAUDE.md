@@ -124,3 +124,33 @@ Key mappings from Dataverse to JSON Schema:
 ## Filtering Defaults
 
 Attributes are included only when `ValidForReadApi = true` AND `IsRetrievable = true`. Attributes with type `Virtual` or `ManagedProperty` are always excluded.
+
+## GitHub Actions Workflows
+
+### Auto Schema Generator (`.github/workflows/generate-schemas.yml`)
+
+Automated pipeline that generates JSON schemas when XML files are uploaded to the repository.
+
+**Trigger:** Push to `Input/*.xml` path
+
+**How to use:**
+1. Push/upload a `customizations.xml` file to the `Input/` folder
+2. GitHub Actions automatically triggers
+3. Schemas are generated to `Output/` with timestamps
+4. Original XML is archived to `Input/Archive/{timestamp}/`
+5. Results are committed and pushed back to the repo
+
+**Workflow steps:**
+1. Checkout repository
+2. Setup .NET 8 SDK
+3. Build solution
+4. Run `dotnet run --project DataverseSchemaGenerator -- --batch --out ./Output`
+5. Commit and push `Output/` and `Input/Archive/` changes
+
+### Build and Package (`.github/workflows/main.yml`)
+
+Builds and publishes the application on every push to main.
+
+**Trigger:** Push to `main` branch or manual dispatch
+
+**Output:** Downloadable artifact `DataverseSchemaGenerator-Windows` containing the published application

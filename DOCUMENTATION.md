@@ -17,10 +17,11 @@ This document provides a comprehensive description of all functionalities in the
    - [Batch Processor](#batch-processor)
 4. [Console Application](#console-application)
 5. [WPF Application](#wpf-application)
-6. [Data Flow](#data-flow)
-7. [Type Mapping Reference](#type-mapping-reference)
-8. [Filtering Behavior](#filtering-behavior)
-9. [Extensibility Guide](#extensibility-guide)
+6. [GitHub Actions Automation](#github-actions-automation)
+7. [Data Flow](#data-flow)
+8. [Type Mapping Reference](#type-mapping-reference)
+9. [Filtering Behavior](#filtering-behavior)
+10. [Extensibility Guide](#extensibility-guide)
 
 ---
 
@@ -843,6 +844,172 @@ WPF implementation using `Microsoft.Win32.OpenFileDialog` and `Microsoft.Win32.O
 4. **Generate:** User clicks Generate Schemas button
 5. **Monitor Progress:** Log shows timestamped progress messages
 6. **Complete:** Status bar shows final count of generated schemas
+
+---
+
+## GitHub Actions Automation
+
+The repository includes GitHub Actions workflows that provide continuous integration and automated schema generation capabilities.
+
+### Workflow Files
+
+| Workflow | File | Purpose |
+|----------|------|---------|
+| Auto Schema Generator | `.github/workflows/generate-schemas.yml` | Automated schema generation pipeline |
+| Build and Package | `.github/workflows/main.yml` | CI build and artifact publishing |
+
+---
+
+### Auto Schema Generator Workflow
+
+**Location:** `.github/workflows/generate-schemas.yml`
+
+This workflow acts as an automated transformation pipeline, converting Dataverse `customizations.xml` files into JSON Schemas simply by uploading a file to the repository.
+
+#### Trigger
+
+```yaml
+on:
+  push:
+    paths:
+      - 'Input/*.xml'
+```
+
+The workflow only triggers when `.xml` files are added to the `Input/` folder, preventing unnecessary server costs.
+
+#### How to Use
+
+1. **Upload:** Push or upload a `customizations.xml` file to the `Input/` folder in the repository
+2. **Automatic Trigger:** GitHub Actions detects the change and starts the workflow
+3. **Processing:** The workflow builds and runs the console app in batch mode
+4. **Output:** JSON Schema files are generated to `Output/` with timestamps
+5. **Archiving:** Original XML files are moved to `Input/Archive/{timestamp}/`
+6. **Sync:** Results are automatically committed and pushed back to the repository
+
+#### Workflow Steps
+
+| Step | Description |
+|------|-------------|
+| **Checkout** | Clones the repository using `actions/checkout@v4` |
+| **Setup .NET** | Installs .NET 8 SDK using `actions/setup-dotnet@v4` |
+| **Build** | Builds the solution with `dotnet build` |
+| **Generate** | Runs `dotnet run --project DataverseSchemaGenerator -- --batch --out ./Output` |
+| **Commit & Push** | Commits `Output/` and `Input/Archive/` changes, pushes to repository |
+
+#### Workflow Configuration
+
+```yaml
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for git push
+```
+
+- **Runner:** Ubuntu (Linux) for cost efficiency
+- **Permissions:** Write access to push generated files back to the repository
+
+#### Repository Structure After Workflow
+
+```
+repository/
+├── Input/
+│   └── Archive/
+│       └── 150126_123000/
+│           └── customizations.xml    # Archived input
+├── Output/
+│   ├── account_150126_123000.json    # Generated schemas
+│   ├── contact_150126_123000.json
+│   └── ...
+└── ...
+```
+
+---
+
+### Build and Package Workflow
+
+**Location:** `.github/workflows/main.yml`
+
+This workflow provides continuous integration by building and publishing the application on every push.
+
+#### Trigger
+
+```yaml
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:  # Manual trigger
+```
+
+#### Workflow Steps
+
+| Step | Description |
+|------|-------------|
+| **Checkout** | Clones the repository |
+| **Setup .NET** | Installs .NET 8 SDK |
+| **Restore** | Restores NuGet dependencies |
+| **Build** | Builds in Release configuration |
+| **Publish** | Creates deployment package |
+| **Upload Artifact** | Uploads as downloadable artifact |
+
+#### Output
+
+- **Artifact Name:** `DataverseSchemaGenerator-Windows`
+- **Contents:** Published application with all dependencies
+- **Download:** Available from the Actions tab in GitHub
+
+---
+
+### Automation Flow Diagram
+
+```
+User uploads XML to Input/
+            │
+            ▼
+┌───────────────────────────┐
+│  GitHub detects push to   │
+│  Input/*.xml path         │
+└────────────┬──────────────┘
+             │
+             ▼
+┌───────────────────────────┐
+│  Spin up Ubuntu runner    │
+│  Install .NET 8 SDK       │
+└────────────┬──────────────┘
+             │
+             ▼
+┌───────────────────────────┐
+│  Build solution           │
+│  (all projects)           │
+└────────────┬──────────────┘
+             │
+             ▼
+┌───────────────────────────┐
+│  Run console app          │
+│  --batch --out ./Output   │
+└────────────┬──────────────┘
+             │
+       ┌─────┴─────┐
+       ▼           ▼
+┌─────────────┐ ┌─────────────┐
+│ Generate    │ │ Archive XML │
+│ JSON schemas│ │ to Archive/ │
+│ to Output/  │ │ {timestamp} │
+└─────────────┘ └─────────────┘
+       │           │
+       └─────┬─────┘
+             │
+             ▼
+┌───────────────────────────┐
+│  git add Output/          │
+│  git add Input/Archive/   │
+│  git commit & push        │
+└────────────┬──────────────┘
+             │
+             ▼
+   Repository updated with
+   generated schemas
+```
 
 ---
 
